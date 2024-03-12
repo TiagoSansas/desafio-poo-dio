@@ -1,12 +1,16 @@
-public class Carro {
+import java.time.LocalDate;
+
+public class Carro implements CalculadoraDeVenda {
 
   private String nome;
-  private Integer ano;
+  private Integer anoFabricacao;
   private String fabricante;
 
-  public Carro(String nome, Integer ano, String fabricante) {
+  static final double VALOR_MOEDA = 5.50;
+
+  public Carro(String nome, Integer anoFabricacao, String fabricante) {
     this.nome = nome;
-    this.ano = ano;
+    this.anoFabricacao = anoFabricacao;
     this.fabricante = fabricante;
   }
 
@@ -14,8 +18,8 @@ public class Carro {
     return nome;
   }
 
-  public Integer getAno() {
-    return ano;
+  public Integer getAnoFabricacaoo() {
+    return anoFabricacao;
   }
 
   public String getFabricante() {
@@ -24,7 +28,15 @@ public class Carro {
 
   @Override
   public String toString() {
-    return "Carro [nome=" + nome + ", ano=" + ano + ", fabricante=" + fabricante + "]";
+    return "Carro [nome=" + nome + ", ano fabricacao=" + anoFabricacao + ", fabricante=" + fabricante
+        + ", valor de Venda="
+        + calcularValorDeVenda() + "]";
+  }
+
+  @Override
+  public Double calcularValorDeVenda() {
+    int anos = LocalDate.now().getYear();
+    return (anos - anoFabricacao) * VALOR_MOEDA;
   }
 
 }
